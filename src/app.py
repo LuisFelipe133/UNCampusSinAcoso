@@ -5,6 +5,7 @@ from models.ModelUser import ModelUser
 from models.entities.User import User
 from flask_login import LoginManager,login_user,logout_user,login_required
 from flask_wtf.csrf import CSRFProtect
+from data.structures.DynamicArray import DynamicArray
 
 app = Flask(__name__) 
 
@@ -59,8 +60,10 @@ def status_404(error):
 
 
 if __name__ == '__main__':
-    app.config.from_object(config['development'])
+    ''''app.config.from_object(config['development'])
     csrf.init_app(app)
     app.register_error_handler(401, status_401)
     app.register_error_handler(404, status_404)
-    app.run()
+    app.run()'''
+    
+
