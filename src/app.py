@@ -6,6 +6,8 @@ from models.entities.User import User
 from flask_login import LoginManager,login_user,logout_user,login_required
 from flask_wtf.csrf import CSRFProtect
 from data.structures.DynamicArray import DynamicArray
+from data.structures.NodeList import NodeList
+from data.structures.LinkedList import LinkedList
 
 app = Flask(__name__) 
 
@@ -65,5 +67,17 @@ if __name__ == '__main__':
     app.register_error_handler(401, status_401)
     app.register_error_handler(404, status_404)
     app.run()'''
-    
+    lista = LinkedList()
+    print(lista.isEmpty())
+    lista.pushBack(1)
+    lista.pushBack(2)
+    lista.pushBack(3)
+    lista.pushBack(4)
+    lista.pushFront(5)
+    lista.pushFront(6)
+    lista.pushFront(7)
+    lista.pushFront(8)
+    lista.printList()
+
+
 
