@@ -4,6 +4,8 @@ class NodeList(Generic[T]):
     data:T = None
     next = None
     prev = None
+    position:int = None
+
     
     def __init__(self,data:T):
         self.data=data
@@ -29,7 +31,8 @@ class LinkedList(Generic[T]):
     def pushFront(self,data:T):
         dataNode = NodeList(data)
         if self.isEmpty():
-            self.head = dataNode = self.tail
+            self.head = dataNode 
+            self.tail = dataNode
         else:
            dataNode.next= self.head 
            self.head.prev= dataNode
@@ -46,6 +49,82 @@ class LinkedList(Generic[T]):
             dataNode.prev = self.tail
             self.tail = dataNode
         self.index+=1
+    def popFront(self):
+        temp:NodeList = self.head
+
+        if self.head==None:
+            temp = None
+            raise Exception("No se puede eliminar en lista vacia")
+        else:
+            if self.head == self.tail:
+                self.head = None
+                self.tail = None
+            else:
+                self.head = self.head.next
+                self.head.prev = None
+        self.index-=1
+        return temp.data
+    
+    def popBack(self):
+        temp:NodeList = self.tail
+        if self.tail==None:
+            temp = None
+            raise Exception("No se puede eliminar en lista vacia")
+        else:
+           if self.head == self.tail:
+                self.head = None
+                self.tail = None 
+           else:
+               self.tail=self.tail.prev
+               self.tail.next=None
+
+        self.index-=1
+        return temp.data
+    
+    #****************************************** buscar elementos
+    def topFront(self):
+        return self.head.data
+    def topBack(self):
+        return self.tail.data
+    
+    def contains(self,data:T):
+        if not self.isEmpty():
+            ref = self.head
+            while(ref!=None):
+                if ref.data==data:
+                    return True
+                ref = ref.next
+        return False
+        
+    def findPosition(self,data:T):
+        if not self.isEmpty():
+            ref = self.head
+            pos = 0
+            while(ref!=None):
+                if ref.data==data:
+                    self.position=pos
+                    return pos
+                ref = ref.next
+                pos+=1
+        return None
+    
+    def findNode(self,position:int):
+        if position<=self.index and position>=0:
+            ref:NodeList = self.head
+            for i in range(0,position):
+                ref = ref.next
+            return ref.data
+        else:
+            raise Exception("Indice no está en la lista")
+    
+    def update(self,position:int,data:T):
+        if position<=self.index and position>=0:
+            ref:NodeList = self.head
+            for i in range(0,position):
+                ref = ref.next
+            ref.data = data
+        else:
+            print("Indice no está en la lista")
     #**************************** Imprimir
     def printList(self):
         ref = self.head

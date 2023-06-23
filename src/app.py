@@ -78,6 +78,16 @@ if __name__ == '__main__':
     lista.pushFront(7)
     lista.pushFront(8)
     lista.printList()
+    print(lista.topFront())
+    print(lista.topBack())
+    lista.popBack()
+    lista.popFront()
+    lista.printList()
+    print(lista.contains(5))
+    print(lista.findPosition(5))
+    print(lista.findNode(2))
+    lista.update(2,56)
+    lista.printList()
 
 
 
