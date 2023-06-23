@@ -10,6 +10,7 @@ from data.structures.LinkedList import LinkedList
 from data.structures.Queue import Queue
 from data.structures.NodeTree import NodeTree
 from data.structures.BST import BST
+from data.structures.AVL import AVL
 
 app = Flask(__name__) 
 
@@ -69,27 +70,18 @@ if __name__ == '__main__':
     app.register_error_handler(401, status_401)
     app.register_error_handler(404, status_404)
     app.run()'''
-    tree = BST()
-    print(tree.isEmpty())
-    tree.insert(43)
-    tree.insert(45)
-    tree.insert(46)
-    tree.insert(15)
-    tree.insert(100)
-    tree.insert(99)
-    tree.insert(31)
-    tree.printLevelOrder()
-    print()
-    tree.delete(45)
-    tree.delete(100)
-    tree.printPreOrder()
-    print()
+    tree = AVL()
+    tree.insert(4)
+    tree.insert(6)
+    tree.insert(7)
+    tree.insert(8)
+    tree.insert(10)
+    tree.insert(25)
     tree.printInOrder()
     print()
-    tree.printPostOrder()
-    print()
-    print()
-    print(tree.findElement(15).data)
+
+
+    
    
 
 
