@@ -12,6 +12,7 @@ from data.structures.NodeTree import NodeTree
 from data.structures.BST import BST
 from data.structures.AVL import AVL
 from data.structures.Heap import Heap
+from data.structures.DisjointSet import DisjointSet
 
 app = Flask(__name__) 
 
@@ -71,26 +72,17 @@ if __name__ == '__main__':
     app.register_error_handler(401, status_401)
     app.register_error_handler(404, status_404)
     app.run()'''
-    heap = Heap()
-    heap.insert(5)
-    heap.insert(8)
-    heap.insert(3)
-    heap.insert(14)
-    heap.insert(56)
-    heap.printPreorder()
-    print()
-    heap.printPostOrder()
-    print()
-    heap.printInOrder()
-    print()
-    heap.insertUnordered([6,7,1,90,5,23,9])
-    heap.printInOrder()
-    print()
-    print(heap.extractMax())
-    heap.change_priority(1,20)
-    heap.heapSort()
-    heap.remove(2)
-    heap.printArray()
+    seti = DisjointSet(5)
+    seti.makeAllSet()
+    print(seti.find(4))
+    print(seti.find(2))
+    seti.union(4,2)
+    print(seti.find(4))
+    print(seti.find(2))
+    print(seti.isConnected(4,2))
+    print(seti.isConnected(4,0))
+    
+    
 
 
 
