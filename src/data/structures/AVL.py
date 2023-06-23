@@ -58,8 +58,42 @@ class AVL(BST):
         if balance <-1 and data > ref.right.data:
             ref = self.rotateLeft(ref)
         return ref
-
-
     
     def insert(self, data: T):
         self.root = self.insertPriv(data,self.root)
+    
+    def deletePriv(self, data: T, ref: NodeTree):
+        if ref is None:
+            return None
+        else:
+            if data < ref.data:
+                ref.left = self.deletePriv(data,ref.left)
+            elif data > ref.data:
+                ref.right = self.deletePriv(data,ref.right)
+            else:
+                if ref.left == None:
+                    temp = ref.right
+                    ref = None
+                    return temp
+                elif ref.right == None:
+                    temp = ref.left
+                    ref = None
+                    return temp
+                else:
+                    temp = self.findMinNode(ref.right)
+                    ref.data = temp.data
+                    ref.right = self.deletePriv(temp.data,ref.right)
+            balance = self.getBalance(ref)
+            if balance >1 and data > ref.left.data:
+                ref = self.doubleRightRotation(ref)
+            if balance >1 and data < ref.left.data:
+                ref = self.rotateRight(ref)
+            if balance <-1 and data > ref.right.data:
+                ref = self.doubleLeftRotation(ref)
+            if balance <-1 and data > ref.right.data:
+                ref = self.rotateLeft(ref)
+        return ref
+    
+    def delete(self, data: T):
+        self.root = self.deletePriv(data,self.root)
+    

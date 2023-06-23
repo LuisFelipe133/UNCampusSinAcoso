@@ -79,6 +79,12 @@ if __name__ == '__main__':
     tree.insert(25)
     tree.printInOrder()
     print()
+    print(tree.findElement(10).data)
+    tree.delete(10)
+    tree.delete(8)
+    tree.printInOrder()
+    print()
+    tree.printLevelOrder()
 
 
     
