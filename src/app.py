@@ -8,6 +8,8 @@ from flask_wtf.csrf import CSRFProtect
 from data.structures.DynamicArray import DynamicArray
 from data.structures.LinkedList import LinkedList
 from data.structures.Queue import Queue
+from data.structures.NodeTree import NodeTree
+from data.structures.BST import BST
 
 app = Flask(__name__) 
 
@@ -67,15 +69,27 @@ if __name__ == '__main__':
     app.register_error_handler(401, status_401)
     app.register_error_handler(404, status_404)
     app.run()'''
-    cola = Queue()
-    cola.enqueue(56)
-    cola.enqueue(4)
-    cola.enqueue(7)
-    print(cola.first())
-    print(cola.last())
-    cola.printQueue()
-    cola.dequeue()
-    cola.printQueue()
-
+    tree = BST()
+    print(tree.isEmpty())
+    tree.insert(43)
+    tree.insert(45)
+    tree.insert(46)
+    tree.insert(15)
+    tree.insert(100)
+    tree.insert(99)
+    tree.insert(31)
+    tree.printLevelOrder()
+    print()
+    tree.delete(45)
+    tree.delete(100)
+    tree.printPreOrder()
+    print()
+    tree.printInOrder()
+    print()
+    tree.printPostOrder()
+    print()
+    print()
+    print(tree.findElement(15).data)
+   
 
 

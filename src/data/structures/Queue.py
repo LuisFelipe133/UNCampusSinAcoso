@@ -90,6 +90,8 @@ class Queue():
             ref.data = data
         else:
             print("Indice no está en la lista")
+    def peek(self):
+        return self.head
     #**************************** Imprimir
     def printQueue(self):
         ref = self.head
