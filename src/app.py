@@ -8,6 +8,7 @@ from flask_wtf.csrf import CSRFProtect
 from data.structures.DynamicArray import DynamicArray
 from data.structures.NodeList import NodeList
 from data.structures.LinkedList import LinkedList
+from data.structures.Queue import Queue
 
 app = Flask(__name__) 
 

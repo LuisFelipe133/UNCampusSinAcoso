@@ -1,17 +1,7 @@
 from typing import Generic,TypeVar
+from .NodeList import NodeList
+
 T = TypeVar("T")
-class NodeList(Generic[T]):
-    data:T = None
-    next = None
-    prev = None
-    position:int = None
-
-    
-    def __init__(self,data:T):
-        self.data=data
-        self.next= None
-        self.prev = None
-
 class LinkedList(Generic[T]):
     head:NodeList 
     tail:NodeList
