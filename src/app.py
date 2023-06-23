@@ -11,6 +11,7 @@ from data.structures.Queue import Queue
 from data.structures.NodeTree import NodeTree
 from data.structures.BST import BST
 from data.structures.AVL import AVL
+from data.structures.Heap import Heap
 
 app = Flask(__name__) 
 
@@ -70,21 +71,27 @@ if __name__ == '__main__':
     app.register_error_handler(401, status_401)
     app.register_error_handler(404, status_404)
     app.run()'''
-    tree = AVL()
-    tree.insert(4)
-    tree.insert(6)
-    tree.insert(7)
-    tree.insert(8)
-    tree.insert(10)
-    tree.insert(25)
-    tree.printInOrder()
+    heap = Heap()
+    heap.insert(5)
+    heap.insert(8)
+    heap.insert(3)
+    heap.insert(14)
+    heap.insert(56)
+    heap.printPreorder()
     print()
-    print(tree.findElement(10).data)
-    tree.delete(10)
-    tree.delete(8)
-    tree.printInOrder()
+    heap.printPostOrder()
     print()
-    tree.printLevelOrder()
+    heap.printInOrder()
+    print()
+    heap.insertUnordered([6,7,1,90,5,23,9])
+    heap.printInOrder()
+    print()
+    print(heap.extractMax())
+    heap.change_priority(1,20)
+    heap.heapSort()
+    heap.remove(2)
+    heap.printArray()
+
 
 
     
