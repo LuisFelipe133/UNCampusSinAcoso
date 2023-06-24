@@ -1,12 +1,13 @@
 from.entities.User import User
+from flask_mysqldb import MySQL
 
 class ModelUser():
     @classmethod
-    def login(self,db,user):
+    def login(self,db:MySQL,user:User):
         try:
             cursor = db.connection.cursor()
-            sql= """ SELECT id,username,password FROM usuarios 
-            WHERE username = '{}' """.format(user.username)
+            sql= """ SELECT usu_id,usu_correo,usu_password FROM usuario 
+            WHERE usu_correo LIKE '{}' """.format(user.correo)
             cursor.execute(sql)
             row=cursor.fetchone()
             if row != None:
@@ -17,10 +18,10 @@ class ModelUser():
         except Exception as ex:
             raise Exception(ex)
     @classmethod
-    def get_by_id(self, db, id):
+    def get_by_id(self, db:MySQL, id):
         try:
             cursor = db.connection.cursor()
-            sql = "SELECT id, username  FROM usuarios WHERE id = {}".format(id)
+            sql = "SELECT usu_id, usu_correo FROM usuario WHERE usu_id = {}".format(id)
             cursor.execute(sql)
             row = cursor.fetchone()
             if row != None:
@@ -29,3 +30,25 @@ class ModelUser():
                 return None
         except Exception as ex:
             raise Exception(ex)
+    
+    @classmethod
+    def test(self,db):
+        try:
+            cursor = db.connection.cursor()
+            sql= """ SELECT usu_id,usu_correo,usu_password FROM usuario 
+            WHERE usu_correo LIKE '{}' """.format("maria@unal.edu.co")
+            cursor.execute(sql)
+            row=cursor.fetchone()
+            print("row: ",row)
+        except Exception as ex:
+            print("EXCEPTION: ",ex)
+
+    @classmethod
+    def comprobar_conexion(self,db:MySQL):
+        try:
+            cursor = db.connection.cursor()
+            cursor.execute("SELECT 1")
+            cursor.close()
+            return 'Conexión exitosa a la base de datos'
+        except Exception as e:
+            return 'Error al conectar a la base de datos: ' + str(e)
