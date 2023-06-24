@@ -13,6 +13,8 @@ from data.structures.BST import BST
 from data.structures.AVL import AVL
 from data.structures.Heap import Heap
 from data.structures.DisjointSet import DisjointSet
+from data.structures.HashTable import HashTable
+from data.structures.HashTest import HashTest
 
 app = Flask(__name__) 
 
@@ -72,15 +74,26 @@ if __name__ == '__main__':
     app.register_error_handler(401, status_401)
     app.register_error_handler(404, status_404)
     app.run()'''
-    seti = DisjointSet(5)
-    seti.makeAllSet()
-    print(seti.find(4))
-    print(seti.find(2))
-    seti.union(4,2)
-    print(seti.find(4))
-    print(seti.find(2))
-    print(seti.isConnected(4,2))
-    print(seti.isConnected(4,0))
+    '''hashy = HashTable()
+    print(hashy.hashFunctionInt(57))
+    print(hashy.hashFunctionString("Blue Sky"))
+    hashy.insert(5,"2-5")
+    hashy.insert(21,"2-21")
+    hashy.insert(37,"2-37")
+    hashy.insert(53,"2-53")
+    hashy.insert(4,"2-4")
+    hashy.insert(16,"2-16")
+    hashy.insert(20,"2-20")'''
+    hashy2 = HashTest()
+    hashy2.insert(4,"hola")
+    hashy2.insert(4,"glugluglu")
+    hashy2.insert(5,"mark")
+    hashy2.insert(10,56)
+    hashy2.insert("hello","there")
+    print(hashy2)
+    hashy2.delete(5)
+    print(hashy2)
+
     
     
 

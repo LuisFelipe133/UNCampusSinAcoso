@@ -6,6 +6,7 @@ class LinkedList(Generic[T]):
     head:NodeList 
     tail:NodeList
     index:int
+    nodeIterable:NodeList
     
     #**************************** constructor
     def __init__(self):
