@@ -80,3 +80,12 @@ class Graph:
             if vertex !=None:
                 if len(vertex)!=0:
                     print(vertex[0],end=" ")
+        print()
+
+    def getNeighbors(self,vertex):
+        repeatedVertex:bool = self.adyacenciaLista.find(vertex)
+        if repeatedVertex:
+            VertexList = self.adyacenciaLista.get(vertex)
+            return VertexList
+        else:
+            raise Exception("Vertex doesn't exist")

@@ -94,12 +94,16 @@ if __name__ == '__main__':
     print(grap.findVertex("X"))
     print(grap.findEdge("A","B"))
     print(grap.findEdge("A","D"))
+    print("neighbors A")
+    print(grap.getNeighbors("A"))
+    print("removing")
     grap.removeVertex("A")
     grap.printGraph()
     grap.removeEdge("C","D")
     grap.printGraph()
     grap.getVertexes()
     grap.getEdges()
+    print(grap.getNeighbors("E"))
     
     
 
