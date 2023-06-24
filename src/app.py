@@ -90,9 +90,12 @@ if __name__ == '__main__':
     hashy2.insert(5,"mark")
     hashy2.insert(10,56)
     hashy2.insert("hello","there")
-    print(hashy2)
+    #print(hashy2)
+    hashy2.printHashTable()
     hashy2.delete(5)
-    print(hashy2)
+    #print(hashy2)
+    hashy2.printHashTable()
+    print(hashy2.find("asdas"))
 
     
     

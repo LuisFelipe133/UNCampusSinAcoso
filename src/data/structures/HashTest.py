@@ -1,16 +1,24 @@
+from .DynamicArray import DynamicArray
 class HashTest:
-    table:list = None
+    table:DynamicArray = None
     size:int = 14
     alpha:float = 0.75
+    numItems:int=0
     a:int = 5
     b:int = 15
     x:int = 3470
 
     def __init__(self):
-        self.table = [[] for _ in range(self.size)]
+        #self.table = [[] for _ in range(self.size)]
+        self.table = DynamicArray()
+        for i in range(self.size):
+            self.table.pushBack([])
 
     def __str__(self)->str:
         return str(self.table)
+    
+    def printHashTable(self):
+        self.table.printArray()
     
     def isPrime(self,number:int):
         if number<=1:
@@ -42,11 +50,11 @@ class HashTest:
             indexedHash = self.hashFunctionInt(key)
         elif(str(type(key))=="<class 'str'>"):
             indexedHash = self.hashFunctionString(key)
-        for kvp in self.table[indexedHash]:
+        for kvp in self.table.array[indexedHash]:
             if kvp[0] == key:
                 kvp[1] = value
                 return 
-        self.table[indexedHash].append([key, value])
+        self.table.array[indexedHash].append([key, value])
 
     def delete(self, key):
         indexedHash =0
@@ -54,9 +62,9 @@ class HashTest:
             indexedHash = self.hashFunctionInt(key)
         elif(str(type(key))=="<class 'str'>"):
             indexedHash = self.hashFunctionString(key)
-        for kvp in self.table[indexedHash]:
+        for kvp in self.table.array[indexedHash]:
             if kvp[0] == key:
-                self.table[indexedHash].remove(kvp)
+                self.table.array[indexedHash].remove(kvp)
                 return
         raise KeyError("Key not found.")
 
@@ -66,10 +74,16 @@ class HashTest:
             indexedHash = self.hashFunctionInt(key)
         elif(str(type(key))=="<class 'str'>"):
             indexedHash = self.hashFunctionString(key)
-        for kvp in self.table[indexedHash]:
+        for kvp in self.table.array[indexedHash]:
             if kvp[0] == key:
                 return kvp[1]
         raise KeyError("Key not found.")
+    def find(self,key):
+        try:
+            self.get(key)
+            return True
+        except:
+            return False 
 
     def __getitem__(self, key):
         return self.get(key)
