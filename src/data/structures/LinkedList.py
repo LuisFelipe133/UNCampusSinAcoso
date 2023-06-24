@@ -123,4 +123,12 @@ class LinkedList(Generic[T]):
             print(ref.data,end=" ")
             ref=ref.next
         print()
+    
+    def __str__(self):
+        returned:str =""
+        ref = self.head
+        while(ref!=None):
+            returned+=str(ref.data+" ")
+            ref=ref.next
+        return returned
 

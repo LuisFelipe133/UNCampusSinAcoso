@@ -14,6 +14,7 @@ from data.structures.AVL import AVL
 from data.structures.Heap import Heap
 from data.structures.DisjointSet import DisjointSet
 from data.structures.HashTable import HashTable
+from data.structures.Graph import Graph
 
 app = Flask(__name__) 
 
@@ -73,28 +74,15 @@ if __name__ == '__main__':
     app.register_error_handler(401, status_401)
     app.register_error_handler(404, status_404)
     app.run()'''
-    '''hashy = HashTable()
-    print(hashy.hashFunctionInt(57))
-    print(hashy.hashFunctionString("Blue Sky"))
-    hashy.insert(5,"2-5")
-    hashy.insert(21,"2-21")
-    hashy.insert(37,"2-37")
-    hashy.insert(53,"2-53")
-    hashy.insert(4,"2-4")
-    hashy.insert(16,"2-16")
-    hashy.insert(20,"2-20")'''
-    hashy2 = HashTable()
-    hashy2.insert(4,"hola")
-    hashy2.insert(4,"glugluglu")
-    hashy2.insert(5,"mark")
-    hashy2.insert(10,56)
-    hashy2.insert("hello","there")
-    #print(hashy2)
-    hashy2.printHashTable()
-    hashy2.delete(5)
-    #print(hashy2)
-    hashy2.printHashTable()
-    print(hashy2.find("asdas"))
+    grap = Graph()
+    grap.addVertex("A")
+    grap.addVertex("B")
+    grap.addVertex("C")
+    grap.addVertex("D")
+    grap.addVertex("E")
+    grap.addVertex("F")
+    grap.printGraph()
+    
 
     
     
