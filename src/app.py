@@ -81,8 +81,19 @@ if __name__ == '__main__':
     grap.addVertex("D")
     grap.addVertex("E")
     grap.addVertex("F")
+    print("solo vertex")
     grap.printGraph()
-    
+    grap.addEdge("A","B")
+    grap.addEdge("A","F")
+    grap.addEdge("A","C")
+    grap.addEdge("C","D")
+    grap.addEdge("E","F")
+    print("vertex y edges")
+    grap.printGraph()
+    print(grap.findVertex("A"))
+    print(grap.findVertex("X"))
+    print(grap.findEdge("A","B"))
+    print(grap.findEdge("A","D"))
 
     
     
