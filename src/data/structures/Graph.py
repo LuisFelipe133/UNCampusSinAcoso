@@ -3,17 +3,27 @@ from .LinkedList import LinkedList
 
 class Graph:
     adyacenciaLista:HashTable
-
+    #*************************** Constructor
     def __init__(self):
         self.adyacenciaLista= HashTable()
-    
+    #*************************** Imprimir
     def printGraph(self):
         self.adyacenciaLista.printHashTable()
-
+    #*************************** Añadir y eliminar
     def addVertex(self,vertexVal):
         repeatedVertex:bool = self.adyacenciaLista.find(vertexVal)
         if not repeatedVertex:
             self.adyacenciaLista.insert(vertexVal,[])
+    
+    def removeVertex(self,vertexToRemove):
+        repeatedVertex:bool = self.adyacenciaLista.find(vertexToRemove)
+        if repeatedVertex:
+            self.adyacenciaLista.delete(vertexToRemove)
+            for i in self.adyacenciaLista.table.array:
+                if i != None and len(i)!=0:
+                    current_edge:list = i[0][1]
+                    if vertexToRemove in current_edge:
+                        current_edge.remove(vertexToRemove)
 
     def addEdge(self,vertexBegin,vertexEnd):
         repeatedVertexBegin:bool = self.adyacenciaLista.find(vertexBegin)
@@ -32,6 +42,7 @@ class Graph:
         else:
             raise Exception("One or both vertex don't exist")
         
+    #*************************** Buscar y recorrer
     def findVertex(self,vertex):
         return self.adyacenciaLista.find(vertex)
     

@@ -94,6 +94,8 @@ if __name__ == '__main__':
     print(grap.findVertex("X"))
     print(grap.findEdge("A","B"))
     print(grap.findEdge("A","D"))
+    grap.removeVertex("A")
+    grap.printGraph()
 
     
     

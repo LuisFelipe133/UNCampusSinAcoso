@@ -96,5 +96,6 @@ class DynamicArray(Generic[T]):
     def printArray(self):
         if(self.index<=self.size):
             for i in range(0,self.index):
-                print(self.array[i],end=" ")
+                if str(self.array[i])!='[]':
+                    print(self.array[i],end=" ")
             print()
