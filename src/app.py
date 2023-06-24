@@ -14,7 +14,6 @@ from data.structures.AVL import AVL
 from data.structures.Heap import Heap
 from data.structures.DisjointSet import DisjointSet
 from data.structures.HashTable import HashTable
-from data.structures.HashTest import HashTest
 
 app = Flask(__name__) 
 
@@ -84,7 +83,7 @@ if __name__ == '__main__':
     hashy.insert(4,"2-4")
     hashy.insert(16,"2-16")
     hashy.insert(20,"2-20")'''
-    hashy2 = HashTest()
+    hashy2 = HashTable()
     hashy2.insert(4,"hola")
     hashy2.insert(4,"glugluglu")
     hashy2.insert(5,"mark")
