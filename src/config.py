@@ -6,7 +6,7 @@ class DevelopmentConfig(Config):
     MYSQL_HOST = 'localhost'
     MYSQL_USER = 'root'
     MYSQL_PASSWORD = 'root'
-    MYSQL_DB = 'bd'
+    MYSQL_DB = 'UNcampus'
 config={
     'development':DevelopmentConfig,
 }

@@ -1,4 +1,6 @@
 CREATE SCHEMA UNcampus;
+use UNcampus;
+-- DROP SCHEMA UNcampus;
 CREATE TABLE usuario(
     usu_id INT PRIMARY KEY auto_increment, 
     usu_cedula VARCHAR(10),
@@ -7,8 +9,9 @@ CREATE TABLE usuario(
     usu_correo VARCHAR(50),
     usu_telefono VARCHAR(12),
     usu_genero VARCHAR(10),
-    usu_edad INT(2),
-    usu_rol VARCHAR(10)
+    usu_edad INT,
+    usu_rol VARCHAR(10),
+    usu_password CHAR(102)
 );
 CREATE TABLE denuncia(
     den_id INT PRIMARY KEY auto_increment,

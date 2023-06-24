@@ -5,8 +5,8 @@ class ModelUser():
     def login(self,db,user):
         try:
             cursor = db.connection.cursor()
-            sql= """ SELECT id,username,password FROM usuarios 
-            WHERE username = '{}' """.format(user.username)
+            sql= """ SELECT usu_id,usu_correo,usu_password FROM usuario 
+            WHERE usu_correo LIKE '{}' """.format(user.coreo)
             cursor.execute(sql)
             row=cursor.fetchone()
             if row != None:
@@ -20,7 +20,7 @@ class ModelUser():
     def get_by_id(self, db, id):
         try:
             cursor = db.connection.cursor()
-            sql = "SELECT id, username  FROM usuarios WHERE id = {}".format(id)
+            sql = "SELECT usu_id, usu_correo FROM usuario WHERE id = {}".format(id)
             cursor.execute(sql)
             row = cursor.fetchone()
             if row != None:
