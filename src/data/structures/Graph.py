@@ -41,6 +41,18 @@ class Graph:
                     vEndList.append(vertexBegin)
         else:
             raise Exception("One or both vertex don't exist")
+    
+    def removeEdge(self,vertexOne,vertexTwo):
+        repeatedVertexOne:bool = self.adyacenciaLista.find(vertexOne)
+        repeatedVertexTwo:bool = self.adyacenciaLista.find(vertexTwo)
+        if repeatedVertexOne and repeatedVertexTwo:
+            edgesOne:list = self.adyacenciaLista.get(vertexOne)
+            edgesTwo:list = self.adyacenciaLista.get(vertexTwo)
+
+            if edgesOne.__contains__(vertexTwo):
+                edgesOne.remove(vertexTwo)
+            if edgesTwo.__contains__(vertexOne):
+                edgesTwo.remove(vertexOne)
         
     #*************************** Buscar y recorrer
     def findVertex(self,vertex):
@@ -53,3 +65,18 @@ class Graph:
             if len(listaVertex)!=0 and listaVertex.__contains__(vertexTwo):
                 return True
         return False
+    
+    def getVertexes(self):
+        for i in range(len(self.adyacenciaLista.table.array)-1):
+            vertex:list=self.adyacenciaLista.table.array[i]
+            if vertex !=None:
+                if len(vertex)!=0:
+                    print(vertex[0][0],end=" ")
+        print()
+
+    def getEdges(self):
+        for i in range(len(self.adyacenciaLista.table.array)-1):
+            vertex:list=self.adyacenciaLista.table.array[i]
+            if vertex !=None:
+                if len(vertex)!=0:
+                    print(vertex[0],end=" ")
