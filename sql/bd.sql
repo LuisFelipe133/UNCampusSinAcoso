@@ -16,6 +16,8 @@ CREATE TABLE usuario(
 CREATE TABLE denuncia(
     den_id INT PRIMARY KEY auto_increment,
     den_usu_id INT,
+    den_cantPersonas INT,
+    den_lugar VARCHAR(50),
     den_tipo VARCHAR(50),
     den_frecuencia VARCHAR(50),
     den_victimario VARCHAR(50),

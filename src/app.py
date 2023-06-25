@@ -1,4 +1,6 @@
-from flask import Flask, render_template,request, redirect, url_for, flash
+from flask import Flask, render_template,request, redirect, url_for, flash, session, get_flashed_messages
+from datetime import date
+#import mysql.connector
 from flask_mysqldb import MySQL
 from config import config
 from models.ModelUser import ModelUser
@@ -18,7 +20,8 @@ from data.structures.Graph import Graph
 
 app = Flask(__name__) 
 
-csrf = CSRFProtect()
+
+
 
 db = MySQL(app)
 login_manager_app=LoginManager(app)
@@ -39,6 +42,7 @@ def login():
         if logged_user!=None:
             if logged_user.password:
                 login_user(logged_user)
+                session['user_id'] = logged_user.id
                 return redirect(url_for('home'))
             else:
                 flash("Invalid Password")
@@ -54,10 +58,36 @@ def logout():
     logout_user()
     return redirect(url_for('login'))
 
-@app.route('/home')
+@app.route('/home', methods=['GET', 'POST'])
 @login_required
 def home():
-    return render_template('home.html')
+        messages = get_flashed_messages()
+        return render_template('home.html', messages=messages)
+
+
+@app.route('/enviar', methods=['POST'])
+def enviar():
+    cantPersonas = request.form['cantPersonas']
+    lugar = request.form['lugar']
+    tipoDeAgresion = request.form['tipoDeAgresion']
+    frecuencia = request.form['frecuencia']
+    ejercidoPor = request.form['ejercidoPor']
+    descripcion = request.form['descripcion']
+
+    cursor = db.connection.cursor()
+    user_id = session['user_id']
+    logged_user = ModelUser.get_by_id(db, user_id)
+    sql = ("INSERT into denuncia(den_usu_id,den_cantPersonas, den_lugar, den_tipo, den_frecuencia, den_victimario, den_descripcion) VALUES (%s,%s, %s, %s, %s, %s, %s)")
+    valores = (int(logged_user.id),int(cantPersonas), lugar, tipoDeAgresion, frecuencia, ejercidoPor, descripcion)
+    cursor.execute(sql, valores)
+    db.connection.commit()
+    cursor.close()
+    db.connection.close()
+    flash('El formulario ha sido enviado correctamente', 'success')
+    return redirect(url_for('home'))
+
+    
+
 
 
 
@@ -71,14 +101,10 @@ def status_404(error):
 
 
 if __name__ == '__main__':
-    with app.app_context():
-        app.config.from_object(config['development'])
-        csrf.init_app(app)
-        app.register_error_handler(401, status_401)
-        app.register_error_handler(404, status_404)
-        app.run()
-
-    
+    app.config.from_object(config['development'])
+    app.register_error_handler(401, status_401)
+    app.register_error_handler(404, status_404)
+    app.run()
 
     
     
