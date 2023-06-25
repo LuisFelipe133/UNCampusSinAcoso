@@ -99,3 +99,13 @@ class ModelUser():
             return results[0]
         except Exception as e:
             print('Error : ' + str(e))
+    
+    @classmethod
+    def delete_denuncia(self,db:MySQL,id):
+        try:
+            cursor = db.connection.cursor()
+            sql= """ DELETE FROM denuncia 
+            WHERE den_id = '{}' """.format(id)
+            cursor.execute(sql)
+        except Exception as e:
+            print('Error : ' + str(e))

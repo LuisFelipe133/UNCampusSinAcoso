@@ -1,12 +1,10 @@
 from flask import Flask, render_template,request, redirect, url_for, flash, session, get_flashed_messages
 from datetime import date
-#import mysql.connector
 from flask_mysqldb import MySQL
 from config import config
 from models.ModelUser import ModelUser
 from models.entities.User import User
 from flask_login import LoginManager,login_user,logout_user,login_required
-from flask_wtf.csrf import CSRFProtect
 from data.structures.DynamicArray import DynamicArray
 from data.structures.LinkedList import LinkedList
 from data.structures.Queue import Queue
@@ -59,18 +57,31 @@ def login():
         return render_template('auth/login.html')
 
 @app.route('/perfil',methods=['POST'])
-@login_required
+#@login_required
 def perfil():
     if request.method=='POST':
+        print(session.accessed)
         user_id = session['user_id']
         results=ModelUser.get_denuncias_curUser(db,user_id)
         return render_template('auth/perfil.html',denuncias=results)
+    else:
+        return "Error, el metodo no fue post"
+    
+@app.route('/delete',methods=['POST'])
+#@login_required
+def deleteDen():
+    if request.method=='POST':
+        id_den = request.form["id_denuncia_del"]
+        ModelUser.delete_denuncia(db,id_den)
+        user_id = session['user_id']
+        results=ModelUser.get_denuncias_curUser(db,user_id)
+        return render_template('auth/perfil.html',denuncias=results)
+        
 
 @app.route('/verDen',methods=['POST'])
-@login_required
+#@login_required
 def verInfo_denuncias():
     if request.method=="POST":
-        id_den = request.form["id_denuncia"]
         den_id = request.form["id_denuncia"]
         denuncia_id=den_id
         results2=ModelUser.get_user_id_denuncia(db,den_id)
@@ -80,7 +91,7 @@ def verInfo_denuncias():
 
 
 @app.route('/denuncias',methods=['POST'])
-@login_required
+#@login_required
 def denuncias():
     if request.method=='POST':
         user_id = session['user_id']
@@ -95,13 +106,13 @@ def logout():
     return redirect(url_for('login'))
 
 @app.route('/home', methods=['GET', 'POST'])
-@login_required
+#@login_required
 def home():
         messages = get_flashed_messages()
         return render_template('home.html', messages=messages)
 
 @app.route('/homeDoc', methods=['GET', 'POST'])
-@login_required
+#@login_required
 def homeDoc():
         messages = get_flashed_messages()
         return render_template('homeDoc.html', messages=messages)

@@ -35,6 +35,7 @@
             <th style="font-weight: lighter; color:white;">Lugar</th>
             <th style="font-weight: lighter; color:white;">Victimario</th>
             <th style="font-weight: lighter; color:white;">Detalles</th>
+            <th style="font-weight: lighter; color:white;">Eliminar</th>
           </tr>
         </thead>
         <tbody>
@@ -44,18 +45,17 @@
               <td>{{denuncia.1}}</td>
               <td>{{denuncia.2}}</td>
               <td>
-
                 <form action="/verDen" method="POST">
                   <input type="hidden" name="id_denuncia" value="{{denuncia.0}}">
                 <button id="btn-abrir-denuncia">Ver detalles</button>
-                <dialog id="denuncia" >
-                 
-                  <p>{{denuncia.0}}<p>
-                  
-                  <button id="btn-cerrar-denuncia">Cerrar descripción</button>
-                </dialog>
               </form>
+              </td>
 
+              <td>
+                <form action="/delete" method="POST">
+                  <input type="hidden" name="id_denuncia_del" value="{{denuncia.0}}">
+                <button id="btn-abrir-denuncia">Eliminar denuncia</button>
+              </form>
               </td>
           </tr>
           {% endfor %}
