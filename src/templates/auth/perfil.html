@@ -32,25 +32,20 @@
         <thead>
           <tr>
             <th style="font-weight: lighter; color:white;">Codigo</th>
-            <th style="font-weight: lighter; color:white;">Fecha</th>
-            <th style="font-weight: lighter; color:white;">Inspeccionar</th>
+            <th style="font-weight: lighter; color:white;">Lugar</th>
+            <th style="font-weight: lighter; color:white;">Victimario</th>
+            <th style="font-weight: lighter; color:white;">Detalles</th>
           </tr>
         </thead>
         <tbody>
+          {% for denuncia in denuncias %}
           <tr>
-            <td>001</td>
-            <td>2023-05-10</td>
-            <td>
-              <button>Haz click aquí</button>
-            </td>
+              <td>{{denuncia.0}}</td>
+              <td>{{denuncia.1}}</td>
+              <td>{{denuncia.2}}</td>
+              <td><button>Haz click aquí</button></td>
           </tr>
-          <tr>
-            <td>002</td>
-            <td>2023-05-11</td>
-            <td>
-              <button>Haz click aquí</button>
-            </td>
-          </tr>
+          {% endfor %}
           <!-- Agrega más filas según sea necesario -->
         </tbody>
       </table>

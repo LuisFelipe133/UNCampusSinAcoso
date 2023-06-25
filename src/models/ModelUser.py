@@ -60,6 +60,6 @@ class ModelUser():
             results = cursor.fetchall()
             cursor.close()
             db.connection.commit()
-            return results[0]
+            return results
         except Exception as e:
             print('Error : ' + e)

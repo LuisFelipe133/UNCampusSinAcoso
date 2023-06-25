@@ -57,8 +57,10 @@ def login():
 @login_required
 def perfil():
     if request.method=='POST':
-        print(ModelUser.get_denuncias_curUser(db,1))
-        return render_template('auth/perfil.html')
+        user_id = session['user_id']
+        results=ModelUser.get_denuncias_curUser(db,user_id)
+        print(results)
+        return render_template('auth/perfil.html',denuncias=results)
 
 
 @app.route('/logout')
