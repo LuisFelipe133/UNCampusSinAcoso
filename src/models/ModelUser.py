@@ -63,7 +63,30 @@ class ModelUser():
             return results
         except Exception as e:
             print('Error : ' + e)
+    @classmethod
+    def get_nombreCompleto_curUser(self,db:MySQL,id):
+        try:
+            cursor = db.connection.cursor()
+            cursor.callproc('get_nombreCompleto_curUser',(id,))
+            nombreCompleto = cursor.fetchall()
+            cursor.close()
+            db.connection.commit()
+            return nombreCompleto[0]
+        except Exception as e:
+            print('Error : ' + e)
     
+    @classmethod
+    def obtenerInformacionEstudiante(self,db:MySQL,id):
+        try:
+            cursor = db.connection.cursor()
+            cursor.callproc('obtenerInformacionEstudiante',(id,))
+            info = cursor.fetchall()
+            cursor.close()
+            db.connection.commit()
+            return info[0]
+        except Exception as e:
+            print('Error : ' + e)
+
     @classmethod
     def get_rol_usuario(self,db:MySQL,id):
         try:
