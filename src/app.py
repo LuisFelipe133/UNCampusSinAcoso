@@ -43,7 +43,11 @@ def login():
             if logged_user.password:
                 login_user(logged_user)
                 session['user_id'] = logged_user.id
-                return redirect(url_for('home'))
+                rol = ModelUser.get_rol_usuario(db,session['user_id'])
+                if rol[0] == 'estudiante':
+                    return redirect(url_for('home'))
+                elif rol[0] == 'psicologo':
+                    return redirect(url_for('homeDoc'))
             else:
                 flash("Invalid Password")
                 return render_template('auth/login.html')
@@ -59,8 +63,16 @@ def perfil():
     if request.method=='POST':
         user_id = session['user_id']
         results=ModelUser.get_denuncias_curUser(db,user_id)
-        print(results)
         return render_template('auth/perfil.html',denuncias=results)
+
+@app.route('/denuncias',methods=['POST'])
+@login_required
+def denuncias():
+    if request.method=='POST':
+        user_id = session['user_id']
+        results=ModelUser.get_all_denuncias(db)
+        print(results)
+        return render_template('auth/denunciasDoc.html',denuncias=results)
 
 
 @app.route('/logout')
@@ -73,6 +85,12 @@ def logout():
 def home():
         messages = get_flashed_messages()
         return render_template('home.html', messages=messages)
+
+@app.route('/homeDoc', methods=['GET', 'POST'])
+@login_required
+def homeDoc():
+        messages = get_flashed_messages()
+        return render_template('homeDoc.html', messages=messages)
 
 
 @app.route('/enviar', methods=['POST'])

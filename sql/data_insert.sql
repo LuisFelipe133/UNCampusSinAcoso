@@ -2,6 +2,8 @@ use UNcampus;
 CREATE VIEW vw_insertUsers AS SELECT 
 	usu_cedula,usu_nombre,usu_apellido,usu_correo,usu_telefono,usu_genero,usu_edad,usu_rol,usu_password
 	from usuario;
+CREATE VIEW vw_denuncia_usuarios AS SELECT
+	den_id,usu_correo,den_lugar,den_victimario FROM usuario JOIN denuncia ON (den_usu_id=usu_id);
 
 INSERT INTO vw_insertUsers VALUES 
 	('1045871234','Maria','Rodriguez','maria@unal.edu.co','15756975369','femenino',21,'estudiante','pbkdf2:sha256:600000$FddyXnIUXIxQ6gVV$ce3c3a0f7c9676465989a8caa68a8d15b7a18752d20477ec98ef887da53ad041'),
