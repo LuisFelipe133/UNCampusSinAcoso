@@ -45,7 +45,12 @@
               <td>{{denuncia.1}}</td>
               <td>{{denuncia.2}}</td>
               <td>{{denuncia.3}}</td>
-              <td><button>Haz click aquí</button></td>
+              <td>
+              <form action="/verDen" method="POST">
+                <input type="hidden" name="id_denuncia" value="{{denuncia.0}}">
+              <button id="btn-abrir-denuncia">Ver detalles</button>
+            </form>
+          </td>
           </tr>
           {% endfor %}
           <!-- Agrega más filas según sea necesario -->

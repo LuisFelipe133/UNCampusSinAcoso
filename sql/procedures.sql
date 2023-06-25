@@ -46,3 +46,11 @@ BEGIN
     WHERE usu_id = estudiante_id;
 END //
 DELIMITER ;
+DELIMITER ??
+CREATE PROCEDURE get_user_id_denuncia(in id INT)
+BEGIN
+	select den_id,concat(usu_nombre,' ',usu_apellido),den_cantPersonas,den_lugar,
+    den_tipo,den_frecuencia,den_victimario,den_descripcion 
+    FROM usuario JOIN denuncia ON (usu_id=den_usu_id) WHERE den_id=id;
+END ??
+DELIMITER ;

@@ -37,6 +37,7 @@
             <th style="font-weight: lighter; color:white;">Lugar</th>
             <th style="font-weight: lighter; color:white;">Victimario</th>
             <th style="font-weight: lighter; color:white;">Detalles</th>
+            <th style="font-weight: lighter; color:white;">Eliminar</th>
           </tr>
         </thead>
         <tbody>
@@ -45,13 +46,25 @@
               <td>{{denuncia.0}}</td>
               <td>{{denuncia.1}}</td>
               <td>{{denuncia.2}}</td>
-              <td><button>Haz click aquí</button></td>
+              <td>
+                <form action="/verDen" method="POST">
+                  <input type="hidden" name="id_denuncia" value="{{denuncia.0}}">
+                <button id="btn-abrir-denuncia">Ver detalles</button>
+              </form>
+              </td>
+
+              <td>
+                <form action="/delete" method="POST">
+                  <input type="hidden" name="id_denuncia_del" value="{{denuncia.0}}">
+                <button id="btn-abrir-denuncia">Eliminar denuncia</button>
+              </form>
+              </td>
           </tr>
           {% endfor %}
-          <!-- Agrega más filas según sea necesario -->
         </tbody>
+
       </table>
       </div>
-      
+      <script src="../../static/js/eventos.js?v=1"></script>
 </body>
 </html>
