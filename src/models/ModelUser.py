@@ -63,3 +63,27 @@ class ModelUser():
             return results
         except Exception as e:
             print('Error : ' + e)
+    
+    @classmethod
+    def get_rol_usuario(self,db:MySQL,id):
+        try:
+            cursor = db.connection.cursor()
+            sql= """ SELECT usu_rol FROM usuario 
+            WHERE usu_id = '{}' """.format(id)
+            cursor.execute(sql)
+            row=cursor.fetchone()
+            return row
+        except Exception as ex:
+            print("EXCEPTION: ",ex)
+    
+    @classmethod
+    def get_all_denuncias(self,db:MySQL):
+        try:
+            cursor = db.connection.cursor()
+            cursor.callproc('get_all_denuncias')
+            results = cursor.fetchall()
+            cursor.close()
+            db.connection.commit()
+            return results
+        except Exception as e:
+            print('Error : ' + e)
