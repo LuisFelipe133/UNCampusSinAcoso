@@ -73,6 +73,7 @@ def verInfo_denuncias():
         id_den = request.form["id_denuncia"]
         den_id = request.form["id_denuncia"]
         denuncia_id=den_id
+        results2=ModelUser.get_user_id_denuncia(db,den_id)
         return render_template('auth/denWin.html',detalles=results2)
     
 
