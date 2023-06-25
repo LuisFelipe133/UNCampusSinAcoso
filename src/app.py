@@ -71,14 +71,11 @@ def status_404(error):
 
 
 if __name__ == '__main__':
-    with app.app_context():
-        app.config.from_object(config['development'])
-        csrf.init_app(app)
-        app.register_error_handler(401, status_401)
-        app.register_error_handler(404, status_404)
-        app.run()
-
-    
+    app.config.from_object(config['development'])
+    csrf.init_app(app)
+    app.register_error_handler(401, status_401)
+    app.register_error_handler(404, status_404)
+    app.run()
 
     
     
