@@ -86,7 +86,7 @@ class ModelUser():
             return info[0]
         except Exception as e:
             print('Error : ' + e)
-
+    
     @classmethod
     def get_rol_usuario(self,db:MySQL,id):
         try:
