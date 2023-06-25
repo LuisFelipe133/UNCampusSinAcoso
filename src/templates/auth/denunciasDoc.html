@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>perfil</title>
+   
+    <link rel="stylesheet" type="text/css" href="../../static/css/perfil.css">
+
+</head>
+<body>
+    <div class="container">
+        <div class="left-half">
+        <h2>Martin moreno jara </h2>
+        <p>edad: 12</p>
+        <p>carrera: Humanas</p>
+        <p>genero: NO binario</p>
+        <p>cuatro</p>
+          <!-- Contenido de la mitad izquierda -->
+        </div>
+        <div class="right-half">
+            <img src="../../static/img/luisd.png" alt="Descripción de la imagen" style="width: 200px; height: 250px;">
+          <!-- Contenido de la mitad derecha -->
+        </div>
+      </div>
+      <div class="container2">
+        <div class="encabezado">
+         <h2 style="color:white;">LISTA DE DENUNCIAS </h2>   
+        </div>
+       
+       <table  class="center-table">
+        <thead>
+          <tr>
+            <th style="font-weight: lighter; color:white;">Codigo</th>
+            <th style="font-weight: lighter; color:white;">Lugar</th>
+            <th style="font-weight: lighter; color:white;">Victimario</th>
+            <th style="font-weight: lighter; color:white;">Detalles</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for denuncia in denuncias %}
+          <tr>
+              <td>{{denuncia.0}}</td>
+              <td>{{denuncia.1}}</td>
+              <td>{{denuncia.2}}</td>
+              <td><button>Haz click aquí</button></td>
+          </tr>
+          {% endfor %}
+          <!-- Agrega más filas según sea necesario -->
+        </tbody>
+      </table>
+      </div>
+      
+</body>
+</html>
