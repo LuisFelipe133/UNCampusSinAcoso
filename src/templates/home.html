@@ -7,6 +7,20 @@
 <h1>Bienvenido, {{current_user.correo}}</h1>
 
 
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <div id="flash-message" class="alert alert-success alert-dismissible fade show" role="alert">
+      {{ messages[0] }}
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  {% endif %}
+{% endwith %}
+
+
+
+
 <link href="/docs/5.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
 
     <!-- Favicons -->
@@ -165,13 +179,13 @@
 
       <div class="col-md-7 col-lg-8">
         <h4 class="mb-3">Completa los siguiente campos</h4>
-        <form class="needs-validation" novalidate>
+        <form action="/enviar" method="POST" class="needs-validation" novalidate>
           <div class="row g-3">
 
             <div class="row gy-3">
                 <div class="col-md-6">
-                  <label for="genero" class="form-label">Cantidad de personas involucradas</label>
-                  <input type="text" class="form-control" id="cantPersonas" placeholder="ej: 2" required>
+                  <label for="cantPersonas" class="form-label">Cantidad de personas involucradas</label>
+                  <input type="text" class="form-control" name="cantPersonas" placeholder="ej: 2" required>
                   <div class="invalid-feedback">
                     Insert correct data.
                   </div>
@@ -179,7 +193,7 @@
     
                 <div class="col-md-6">
                   <label for="lugar" class="form-label">Lugar en el que ocurrió la agresión</label>
-                  <input type="text" class="form-control" id="lugar" placeholder="ej: plazoleta del CyT" required>
+                  <input type="text" class="form-control" name="lugar" placeholder="ej: plazoleta del CyT" required>
                   <div class="invalid-feedback">
                     Insert correct data.
                   </div>
@@ -187,7 +201,7 @@
 
                 <div class="col-md-5">
                     <label for="tipoDeAgresion" class="form-label">Tipo de Agresión</label>
-                    <select class="form-select" id="tipoDeAgresion" required>
+                    <select class="form-select" name="tipoDeAgresion" required>
                       <option value="">Seleccione...</option>
                       <option>Físico</option>
                       <option>Verbal</option>
@@ -201,7 +215,7 @@
                 
                   <div class="col-md-4">
                     <label for="frecuencia" class="form-label">Frecuencia</label>
-                    <select class="form-select" id="frecuencia" required>
+                    <select class="form-select" name="frecuencia" required>
                       <option value="">Seleccione...</option>
                       <option>1 a 2 veces a la semana</option>
                       <option>3 a 5 veces a la semana</option>
@@ -214,7 +228,7 @@
                   
                   <div class="col-md-3">
                     <label for="ejercidoPor" class="form-label">Ejercido por</label>
-                    <select class="form-select" id="ejercidoPor" required>
+                    <select class="form-select" name="ejercidoPor" required>
                       <option value="">Seleccione...</option>
                       <option>Estudiante</option>
                       <option>Docente</option>
@@ -228,7 +242,7 @@
 
             <div class="col-12">
               <label for="descripcion" class="form-label">Descripción</label>
-              <textarea class="form-control" id="descripcion" placeholder="Describa la situación"></textarea>
+              <textarea class="form-control" name="descripcion" placeholder="Describa la situación"></textarea>
             </div>
           <hr class="my-4">
           <button class="w-100 btn btn-primary btn-lg" type="submit">Enviar formulario</button>
@@ -251,4 +265,11 @@
     <script src="checkout.js"></script></body>
 
 <a class="btn btn-secondary" href="{{ url_for('logout') }}">Logout</a>
+<script>
+    // Cerrar el mensaje flash al hacer clic en el botón de cerrar
+    document.getElementById('flash-message').addEventListener('click', function() {
+      this.style.display = 'none';
+    });
+  </script>
+  
 {% endblock %}
