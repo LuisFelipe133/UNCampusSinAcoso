@@ -44,21 +44,23 @@
               <td>{{denuncia.1}}</td>
               <td>{{denuncia.2}}</td>
               <td>
-                <button id="btn-abrir-denuncia">Haz click aquí</button>
-                <dialog id="denuncia">
+
+                <form action="/verDen" method="POST">
+                  <input type="hidden" name="id_denuncia" value="{{denuncia.0}}">
+                <button id="btn-abrir-denuncia">Ver detalles</button>
+                <dialog id="denuncia" >
                  
-                  <td>{{detalles.1}}</td>
-                  
-                 
+                  <p>{{denuncia.0}}<p>
                   
                   <button id="btn-cerrar-denuncia">Cerrar descripción</button>
                 </dialog>
+              </form>
+
               </td>
           </tr>
           {% endfor %}
-
-          <!-- Agrega más filas según sea necesario -->
         </tbody>
+
       </table>
       </div>
       <script src="../../static/js/eventos.js?v=1"></script>

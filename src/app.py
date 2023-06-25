@@ -25,6 +25,7 @@ app = Flask(__name__)
 
 db = MySQL(app)
 login_manager_app=LoginManager(app)
+denuncia_id:int
 
 @login_manager_app.user_loader
 def load_user(id):
@@ -63,10 +64,18 @@ def perfil():
     if request.method=='POST':
         user_id = session['user_id']
         results=ModelUser.get_denuncias_curUser(db,user_id)
-        den_id = session['den_id']
-        results2=ModelUser.get_user_id_denuncia(db,den_id)
+        return render_template('auth/perfil.html',denuncias=results)
 
-        return render_template('auth/perfil.html',denuncias=results,detalles=results2)
+@app.route('/verDen',methods=['POST'])
+@login_required
+def verInfo_denuncias():
+    if request.method=="POST":
+        id_den = request.form["id_denuncia"]
+        den_id = request.form["id_denuncia"]
+        denuncia_id=den_id
+        return render_template('auth/denWin.html',detalles=results2)
+    
+
 
 
 @app.route('/denuncias',methods=['POST'])
