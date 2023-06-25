@@ -1,0 +1,95 @@
+.container {
+    
+    display: flex;
+    height: 50vh; /* Establece la altura del contenedor para ocupar toda la pantalla */
+    /*background-color: #9cf3eff6;*/
+  }
+.container2{
+   /*  background-color: #47f1a2f6;*/
+   /*background-color: #9cf3eff6;*/
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  
+}
+  
+.center-table {
+    margin-left: auto;
+    margin-right: auto; 
+    
+  }
+/*-----------------------------------------------*/
+
+table.center-table {
+    border-collapse: collapse;
+    border-radius: 10px;
+    /*background-color: #b6f8f5fa;*/
+    width: 70%;
+  }
+  
+  table.center-table th,
+  table.center-table td {
+    border: 1px solid rgb(196, 216, 214);
+    /*border: 1px solid rgb(196, 216, 214);*/
+    padding: 8px;
+    text-align: center;
+  }
+  
+  table.center-table th {
+    background-color: #0f74f8fa;
+  
+  }
+  
+  table.center-table button {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+  }
+  
+  table.center-table button:hover {
+    text-decoration: underline;
+  }
+  
+/*-----------------------------------------------*/
+
+
+  .left-half {
+    font-family: Calibri, Arial;
+    flex: 1;
+    margin-top: 50px;
+    margin-left: 150px;
+    margin-right: 80px;
+    /*#0f74f8fa*/
+    /*rgb(216, 192, 192);*/
+    border: 1px solid #0f74f8fa;
+    border-radius: 10px;
+    padding: 15px;
+   /* Márgen izquierdo de 40px */
+    /*background-color: #47f1a2f6;/*background-color: #48f548f6; /* Color de fondo de la mitad izquierda */
+  }
+  
+  .right-half {
+    flex: 0.5;
+    margin-top: 60px;
+    margin-right: 150px;
+    /*background-color: #47f1a2f6;/*background-color: #eaeaea; Color de fondo de la mitad derecha */
+  }
+
+
+.encabezado{
+    background-color: #0f74f8fa;
+    border-radius: 10px;
+    margin-right: 145px;
+    margin-left: 145px;
+}
+
+  body{
+   /* background-color: #e2fcf0f6;¨*/
+    font-family: Arial, sans-serif;
+    /*margin-top: 50px;*/
+    margin-left: 200px; /* Márgen izquierdo de 40px */
+    margin-right: 200px; /* Márgen derecho de 50px */
+    flex: 1;
+    /*background-color: #47f1a2f6; /* Color de fondo de la mitad izquierda */
+  }
+  

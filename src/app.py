@@ -53,6 +53,16 @@ def login():
     else:
         return render_template('auth/login.html')
 
+@app.route('/perfil',methods=['POST'])
+@login_required
+def perfil():
+    if request.method=='POST':
+        user_id = session['user_id']
+        results=ModelUser.get_denuncias_curUser(db,user_id)
+        print(results)
+        return render_template('auth/perfil.html',denuncias=results)
+
+
 @app.route('/logout')
 def logout():
     logout_user()

@@ -52,3 +52,14 @@ class ModelUser():
             return 'Conexión exitosa a la base de datos'
         except Exception as e:
             return 'Error al conectar a la base de datos: ' + str(e)
+    @classmethod
+    def get_denuncias_curUser(self,db:MySQL,id):
+        try:
+            cursor = db.connection.cursor()
+            cursor.callproc('get_denuncias_curUser',(id,))
+            results = cursor.fetchall()
+            cursor.close()
+            db.connection.commit()
+            return results
+        except Exception as e:
+            print('Error : ' + e)
