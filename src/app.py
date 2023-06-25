@@ -18,12 +18,9 @@ from data.structures.Graph import Graph
 
 app = Flask(__name__) 
 
-
-
-
 db = MySQL(app)
 login_manager_app=LoginManager(app)
-denuncia_id:int
+
 
 @login_manager_app.user_loader
 def load_user(id):
@@ -43,6 +40,9 @@ def login():
                 login_user(logged_user)
                 session['user_id'] = logged_user.id
                 rol = ModelUser.get_rol_usuario(db,session['user_id'])
+                User.setUserRol(rol[0])
+                print("rol 1:",rol)
+
                 if rol[0] == 'estudiante':
                     return redirect(url_for('home'))
                 elif rol[0] == 'psicologo':
@@ -57,10 +57,9 @@ def login():
         return render_template('auth/login.html')
 
 @app.route('/perfil',methods=['POST'])
-#@login_required
+@login_required
 def perfil():
     if request.method=='POST':
-        print(session.accessed)
         user_id = session['user_id']
         results=ModelUser.get_denuncias_curUser(db,user_id)
         nombreCompleto=ModelUser.get_nombreCompleto_curUser(db,user_id)
@@ -70,18 +69,20 @@ def perfil():
         
     
 @app.route('/delete',methods=['POST'])
-#@login_required
+@login_required
 def deleteDen():
     if request.method=='POST':
         id_den = request.form["id_denuncia_del"]
         ModelUser.delete_denuncia(db,id_den)
         user_id = session['user_id']
         results=ModelUser.get_denuncias_curUser(db,user_id)
-        return render_template('auth/perfil.html',denuncias=results)
+        nombreCompleto=ModelUser.get_nombreCompleto_curUser(db,user_id)
+        info=ModelUser.obtenerInformacionEstudiante(db,user_id)
+        return render_template('auth/perfil.html',denuncias=results, nombreCompleto=nombreCompleto,info=info)
         
 
 @app.route('/verDen',methods=['POST'])
-#@login_required
+@login_required
 def verInfo_denuncias():
     if request.method=="POST":
         den_id = request.form["id_denuncia"]
@@ -90,11 +91,8 @@ def verInfo_denuncias():
         return render_template('auth/denWin.html',detalles=results2)
     
 
-
->>>>>>> diseno_perfil-m
-
 @app.route('/denuncias',methods=['POST'])
-#@login_required
+@login_required
 def denuncias():
     if request.method=='POST':
         user_id = session['user_id']
@@ -109,13 +107,13 @@ def logout():
     return redirect(url_for('login'))
 
 @app.route('/home', methods=['GET', 'POST'])
-#@login_required
+@login_required
 def home():
         messages = get_flashed_messages()
         return render_template('home.html', messages=messages)
 
 @app.route('/homeDoc', methods=['GET', 'POST'])
-#@login_required
+@login_required
 def homeDoc():
         messages = get_flashed_messages()
         return render_template('homeDoc.html', messages=messages)
@@ -140,7 +138,11 @@ def enviar():
     cursor.close()
     db.connection.close()
     flash('El formulario ha sido enviado correctamente', 'success')
-    return redirect(url_for('home'))
+
+    if User.getUserRol() == 'estudiante':
+        return redirect(url_for('home'))
+    elif User.getUserRol() == 'psicologo':
+        return redirect(url_for('homeDoc'))
 
     
 

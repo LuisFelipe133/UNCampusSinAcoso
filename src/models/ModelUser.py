@@ -97,7 +97,7 @@ class ModelUser():
             row=cursor.fetchone()
             return row
         except Exception as ex:
-            print("EXCEPTION: ",ex)
+            print("EXCEPTION: ",ex.with_traceback)
     
     @classmethod
     def get_all_denuncias(self,db:MySQL):
