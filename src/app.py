@@ -1,6 +1,6 @@
 from flask import Flask, render_template,request, redirect, url_for, flash, session, get_flashed_messages
 from datetime import date
-import mysql.connector
+#import mysql.connector
 from flask_mysqldb import MySQL
 from config import config
 from models.ModelUser import ModelUser
@@ -74,21 +74,15 @@ def enviar():
     ejercidoPor = request.form['ejercidoPor']
     descripcion = request.form['descripcion']
 
-    conn = mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="root",
-        database="us"
-    )
-    cursor = conn.cursor()
+    cursor = db.connection.cursor()
     user_id = session['user_id']
     logged_user = ModelUser.get_by_id(db, user_id)
-    sql = ("INSERT into denuncia(id,cantPersonas, lugar, den_tipo, den_frecuencia, den_victimario, den_descripcion) VALUES (%s,%s, %s, %s, %s, %s, %s)")
-    valores = (logged_user.id,cantPersonas, lugar, tipoDeAgresion, frecuencia, ejercidoPor, descripcion)
+    sql = ("INSERT into denuncia(den_usu_id,den_cantPersonas, den_lugar, den_tipo, den_frecuencia, den_victimario, den_descripcion) VALUES (%s,%s, %s, %s, %s, %s, %s)")
+    valores = (int(logged_user.id),int(cantPersonas), lugar, tipoDeAgresion, frecuencia, ejercidoPor, descripcion)
     cursor.execute(sql, valores)
-    conn.commit()
+    db.connection.commit()
     cursor.close()
-    conn.close()
+    db.connection.close()
     flash('El formulario ha sido enviado correctamente', 'success')
     return redirect(url_for('home'))
 
@@ -107,21 +101,10 @@ def status_404(error):
 
 
 if __name__ == '__main__':
-<<<<<<< HEAD
-    with app.app_context():
-        app.config.from_object(config['development'])
-        csrf.init_app(app)
-        app.register_error_handler(401, status_401)
-        app.register_error_handler(404, status_404)
-        app.run()
-
-    
-=======
     app.config.from_object(config['development'])
     app.register_error_handler(401, status_401)
     app.register_error_handler(404, status_404)
     app.run()
->>>>>>> 624f90a7cc7cf5f6afe43c2b81f553bb0301face
 
     
     
