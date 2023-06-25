@@ -43,13 +43,24 @@
               <td>{{denuncia.0}}</td>
               <td>{{denuncia.1}}</td>
               <td>{{denuncia.2}}</td>
-              <td><button>Haz click aquí</button></td>
+              <td>
+                <button id="btn-abrir-denuncia">Haz click aquí</button>
+                <dialog id="denuncia">
+                 
+                  <td>{{detalles.1}}</td>
+                  
+                 
+                  
+                  <button id="btn-cerrar-denuncia">Cerrar descripción</button>
+                </dialog>
+              </td>
           </tr>
           {% endfor %}
+
           <!-- Agrega más filas según sea necesario -->
         </tbody>
       </table>
       </div>
-      
+      <script src="../../static/js/eventos.js?v=1"></script>
 </body>
 </html>

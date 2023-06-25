@@ -87,3 +87,15 @@ class ModelUser():
             return results
         except Exception as e:
             print('Error : ' + e)
+
+    @classmethod 
+    def get_user_id_denuncia(self,db:MySQL):
+        try:
+            cursor = db.connection.cursor()
+            cursor.callproc('get_user_id_denuncia')
+            results = cursor.fetchall()
+            cursor.close()
+            db.connection.commit()
+            return results[0]
+        except Exception as e:
+            print('Error : ' + e)

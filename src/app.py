@@ -63,7 +63,11 @@ def perfil():
     if request.method=='POST':
         user_id = session['user_id']
         results=ModelUser.get_denuncias_curUser(db,user_id)
-        return render_template('auth/perfil.html',denuncias=results)
+        den_id = session['den_id']
+        results2=ModelUser.get_user_id_denuncia(db,den_id)
+
+        return render_template('auth/perfil.html',denuncias=results,detalles=results2)
+
 
 @app.route('/denuncias',methods=['POST'])
 @login_required
