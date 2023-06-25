@@ -41,7 +41,6 @@ def login():
                 session['user_id'] = logged_user.id
                 rol = ModelUser.get_rol_usuario(db,session['user_id'])
                 User.setUserRol(rol[0])
-                print("rol 1:",rol)
 
                 if rol[0] == 'estudiante':
                     return redirect(url_for('home'))
@@ -79,6 +78,17 @@ def deleteDen():
         nombreCompleto=ModelUser.get_nombreCompleto_curUser(db,user_id)
         info=ModelUser.obtenerInformacionEstudiante(db,user_id)
         return render_template('auth/perfil.html',denuncias=results, nombreCompleto=nombreCompleto,info=info)
+
+@app.route('/deletePsi',methods=['POST'])
+@login_required
+def deleteDenPsi():
+    if request.method=='POST':
+        id_den = request.form["id_denuncia_del"]
+        ModelUser.delete_denuncia(db,id_den)
+        user_id = session['user_id']
+        results=ModelUser.get_all_denuncias(db)
+        print(results)
+        return render_template('auth/denunciasDoc.html',denuncias=results)
         
 
 @app.route('/verDen',methods=['POST'])

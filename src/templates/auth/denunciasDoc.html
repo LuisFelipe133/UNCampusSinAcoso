@@ -9,20 +9,7 @@
 
 </head>
 <body>
-    <div class="container">
-        <div class="left-half">
-        <h2>Bienvenido Doc </h2>
-        <p>edad: 12</p>
-        <p>carrera: Humanas</p>
-        <p>genero: NO binario</p>
-        <p>cuatro</p>
-          <!-- Contenido de la mitad izquierda -->
-        </div>
-        <div class="right-half">
-            <img src="../../static/img/luisd.png" alt="Descripción de la imagen" style="width: 200px; height: 250px;">
-          <!-- Contenido de la mitad derecha -->
-        </div>
-      </div>
+    
       <div class="container2">
         <div class="encabezado">
          <h2 style="color:white;">LISTA DE DENUNCIAS </h2>   
@@ -36,6 +23,7 @@
             <th style="font-weight: lighter; color:white;">Lugar</th>
             <th style="font-weight: lighter; color:white;">Victimario</th>
             <th style="font-weight: lighter; color:white;">Detalles</th>
+            <th style="font-weight: lighter; color:white;">Atender</th>
           </tr>
         </thead>
         <tbody>
@@ -50,13 +38,22 @@
                 <input type="hidden" name="id_denuncia" value="{{denuncia.0}}">
               <button id="btn-abrir-denuncia">Ver detalles</button>
             </form>
+
+            <td>
+              <form action="/deletePsi" method="POST">
+                <input type="hidden" name="id_denuncia_del" value="{{denuncia.0}}">
+              <button id="btn-abrir-denuncia">Denuncia atendida</button>
+            </form>
+            </td>
           </td>
+
           </tr>
           {% endfor %}
           <!-- Agrega más filas según sea necesario -->
         </tbody>
       </table>
-      </div>
+      <a class="btn btn-secondary" href="{{ url_for('backHome') }}">Retroceder</a>
+    </div>
       
 </body>
 </html>
