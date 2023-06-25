@@ -118,6 +118,14 @@ def homeDoc():
         messages = get_flashed_messages()
         return render_template('homeDoc.html', messages=messages)
 
+@app.route('/backHome')
+def backHome():
+    messages = get_flashed_messages()
+    if User.getUserRol() == 'estudiante':
+        return render_template('home.html', messages=messages)
+    elif User.getUserRol() == 'psicologo':
+        return render_template('homeDoc.html', messages=messages)
+
 
 @app.route('/enviar', methods=['POST'])
 def enviar():

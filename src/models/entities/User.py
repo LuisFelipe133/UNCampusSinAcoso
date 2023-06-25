@@ -8,6 +8,7 @@ class User(UserMixin):
         self.id = id
         self.correo = correo
         self.password = password
+        self.rol=None
     def to_dict(self):
         return {
             'id': self.id,
