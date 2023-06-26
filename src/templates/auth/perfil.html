@@ -11,12 +11,12 @@
 <body>
     <div class="container">
         <div class="left-half">
-        <h2>Nombre: {{nombreCompleto.0}} </h2>
+        <h2>Nombre: {{nombreCompleto.get("nombre")}} </h2>
         <ul>
-          <h3><li>Cédula: {{ info.0 }}</li></h3>
-          <h3><li>Teléfono: {{ info.1 }}</li></h3>
-          <h3><li>Género: {{ info.2 }}</li></h3>
-          <h3><li>Edad: {{ info.3 }}</li></h3>
+          <h3><li>Cédula: {{ info.get("cedula") }}</li></h3>
+          <h3><li>Teléfono: {{ info.get("telefono") }}</li></h3>
+          <h3><li>Género: {{ info.get("genero") }}</li></h3>
+          <h3><li>Edad: {{ info.get("edad") }}</li></h3>
         </ul>
           <!-- Contenido de la mitad izquierda -->
         </div>

@@ -79,26 +79,34 @@ class ModelUser():
         except Exception as e:
             print('Error : ' + e)
     @classmethod
-    def get_nombreCompleto_curUser(self,db:MySQL,id):
+    def get_nombreCompleto_curUser(self,db:MySQL,id)->HashTable:
         try:
             cursor = db.connection.cursor()
             cursor.callproc('get_nombreCompleto_curUser',(id,))
             nombreCompleto = cursor.fetchall()
             cursor.close()
             db.connection.commit()
-            return nombreCompleto[0]
+            nombre = HashTable()
+            nombre.insert("nombre",nombreCompleto[0][0])
+            return nombre
         except Exception as e:
             print('Error : ' + e)
     
     @classmethod
-    def obtenerInformacionEstudiante(self,db:MySQL,id):
+    def obtenerInformacionEstudiante(self,db:MySQL,id)->HashTable:
         try:
             cursor = db.connection.cursor()
             cursor.callproc('obtenerInformacionEstudiante',(id,))
             info = cursor.fetchall()
             cursor.close()
             db.connection.commit()
-            return info[0]
+            informacion = HashTable()
+            informacion.insert("cedula",info[0][0])
+            informacion.insert("telefono",info[0][1])
+            informacion.insert("genero",info[0][2])
+            informacion.insert("edad",info[0][3])
+            informacion.printHashTable()
+            return informacion
         except Exception as e:
             print('Error : ' + e)
     
