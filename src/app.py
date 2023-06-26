@@ -39,12 +39,13 @@ def login():
             if logged_user.password:
                 login_user(logged_user)
                 session['user_id'] = logged_user.id
-                rol = ModelUser.get_rol_usuario(db,session['user_id'])
-                User.setUserRol(rol[0])
+                rol:HashTable = ModelUser.get_rol_usuario(db,session['user_id'])
+                role = rol.get("rol")
+                User.setUserRol(role)
 
-                if rol[0] == 'estudiante':
+                if role == 'estudiante':
                     return redirect(url_for('home'))
-                elif rol[0] == 'psicologo':
+                elif role == 'psicologo':
                     return redirect(url_for('homeDoc'))
             else:
                 flash("Invalid Password")
@@ -60,9 +61,9 @@ def login():
 def perfil():
     if request.method=='POST':
         user_id = session['user_id']
-        results=ModelUser.get_denuncias_curUser(db,user_id)
+        results:Queue=ModelUser.get_denuncias_curUser(db,user_id)
         nombreCompleto=ModelUser.get_nombreCompleto_curUser(db,user_id)
-        info=ModelUser.obtenerInformacionEstudiante(db,user_id)
+        info:HashTable=ModelUser.obtenerInformacionEstudiante(db,user_id)
         return render_template('auth/perfil.html',denuncias=results, nombreCompleto=nombreCompleto,info=info)
 
         
@@ -75,7 +76,7 @@ def deleteDen():
         ModelUser.delete_denuncia(db,id_den)
         user_id = session['user_id']
         results=ModelUser.get_denuncias_curUser(db,user_id)
-        nombreCompleto=ModelUser.get_nombreCompleto_curUser(db,user_id)
+        nombreCompleto:HashTable=ModelUser.get_nombreCompleto_curUser(db,user_id)
         info=ModelUser.obtenerInformacionEstudiante(db,user_id)
         return render_template('auth/perfil.html',denuncias=results, nombreCompleto=nombreCompleto,info=info)
 
@@ -86,8 +87,7 @@ def deleteDenPsi():
         id_den = request.form["id_denuncia_del"]
         ModelUser.delete_denuncia(db,id_den)
         user_id = session['user_id']
-        results=ModelUser.get_all_denuncias(db)
-        print(results)
+        results:Queue=ModelUser.get_all_denuncias(db)
         return render_template('auth/denunciasDoc.html',denuncias=results)
         
 
@@ -97,7 +97,7 @@ def verInfo_denuncias():
     if request.method=="POST":
         den_id = request.form["id_denuncia"]
         denuncia_id=den_id
-        results2=ModelUser.get_user_id_denuncia(db,den_id)
+        results2:Queue=ModelUser.get_user_id_denuncia(db,den_id)
         return render_template('auth/denWin.html',detalles=results2)
     
 

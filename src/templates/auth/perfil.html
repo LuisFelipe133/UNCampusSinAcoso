@@ -11,12 +11,12 @@
 <body>
     <div class="container">
         <div class="left-half">
-        <h2>Nombre: {{nombreCompleto.0}} </h2>
+        <h2>Nombre: {{nombreCompleto.get("nombre")}} </h2>
         <ul>
-          <h3><li>Cédula: {{ info.0 }}</li></h3>
-          <h3><li>Teléfono: {{ info.1 }}</li></h3>
-          <h3><li>Género: {{ info.2 }}</li></h3>
-          <h3><li>Edad: {{ info.3 }}</li></h3>
+          <h3><li>Cédula: {{ info.get("cedula") }}</li></h3>
+          <h3><li>Teléfono: {{ info.get("telefono") }}</li></h3>
+          <h3><li>Género: {{ info.get("genero") }}</li></h3>
+          <h3><li>Edad: {{ info.get("edad") }}</li></h3>
         </ul>
           <!-- Contenido de la mitad izquierda -->
         </div>
@@ -41,21 +41,24 @@
           </tr>
         </thead>
         <tbody>
-          {% for denuncia in denuncias %}
+          {% for i in range(denuncias.len()//3) %}
+          {% set id = denuncias.dequeue()%}
+          {% set lugar = denuncias.dequeue() %}
+          {% set victimario = denuncias.dequeue() %}
           <tr>
-              <td>{{denuncia.0}}</td>
-              <td>{{denuncia.1}}</td>
-              <td>{{denuncia.2}}</td>
+              <td>{{id}}</td>
+              <td>{{lugar}}</td>
+              <td>{{victimario}}</td>
               <td>
                 <form action="/verDen" method="POST">
-                  <input type="hidden" name="id_denuncia" value="{{denuncia.0}}">
+                  <input type="hidden" name="id_denuncia" value="{{id}}">
                 <button id="btn-abrir-denuncia">Ver detalles</button>
               </form>
               </td>
 
               <td>
                 <form action="/delete" method="POST">
-                  <input type="hidden" name="id_denuncia_del" value="{{denuncia.0}}">
+                  <input type="hidden" name="id_denuncia_del" value="{{id}}">
                 <button id="btn-abrir-denuncia">Eliminar denuncia</button>
               </form>
               </td>
