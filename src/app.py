@@ -62,12 +62,14 @@ def login():
 def perfil():
     if request.method=='POST':
         user_id = session['user_id']
-        results=ModelUser.get_denuncias_curUser(db,user_id)
-        den_id = session['den_id']
-        results2=ModelUser.get_user_id_denuncia(db,den_id)
+        results=ModelUser.get_denuncias_curUser(db,user_id)    
+        return render_template('auth/perfil.html',denuncias=results)
 
-        return render_template('auth/perfil.html',denuncias=results,detalles=results2)
-
+def pop_up(param1):
+    if request.method=='POST':
+        den_id = param1
+        results=ModelUser.get_user_id_denuncia(db,den_id)    
+        return render_template('auth/perfil.html',detalles=results)
 
 @app.route('/denuncias',methods=['POST'])
 @login_required
@@ -119,6 +121,7 @@ def enviar():
     return redirect(url_for('home'))
 
     
+
 
 
 
