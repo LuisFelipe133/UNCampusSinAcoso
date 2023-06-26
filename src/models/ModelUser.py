@@ -105,7 +105,6 @@ class ModelUser():
             informacion.insert("telefono",info[0][1])
             informacion.insert("genero",info[0][2])
             informacion.insert("edad",info[0][3])
-            informacion.printHashTable()
             return informacion
         except Exception as e:
             print('Error : ' + e)
@@ -120,7 +119,6 @@ class ModelUser():
             row=cursor.fetchone()
             rol = HashTable()
             rol.insert("rol",row[0])
-            print(rol.get("rol"))
             return rol
         except Exception as ex:
             print("EXCEPTION: ",ex.with_traceback)
@@ -142,14 +140,18 @@ class ModelUser():
             print('Error : ',e)
 
     @classmethod 
-    def get_user_id_denuncia(self,db:MySQL,id):
+    def get_user_id_denuncia(self,db:MySQL,id)->Queue:
         try:
             cursor = db.connection.cursor()
             cursor.callproc('get_user_id_denuncia',(id,))
             results = cursor.fetchall()
             cursor.close()
             db.connection.commit()
-            return results[0]
+            detalles = Queue()
+            for j in range(len(results)):
+                for i in results[j]:
+                    detalles.enqueue(i)
+            return detalles
         except Exception as e:
             print('Error : ' + str(e))
     

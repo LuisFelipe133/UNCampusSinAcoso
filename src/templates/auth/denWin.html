@@ -12,14 +12,23 @@
      <h1 class="welcome-header">Detalles de la denuncia</h1>
     <div class="container">
         <div class="left-half">
-            <p><strong>id: </strong> {{detalles.0}}</p>
-            <p><strong>Nombre de la victima: </strong> {{detalles.1}}</p>
-            <p><strong>Número de victimarios: </strong> {{detalles.2}}</p>
-            <p><strong>Lugar: </strong> {{detalles.3}}</p>
-            <p><strong>Tipo de acoso: </strong> {{detalles.4}}</p>
-            <p><strong>Frecuencia: </strong> {{detalles.5}}</p>
-            <p><strong>Victimario: </strong> {{detalles.6}}</p>
-            <p><strong>Descripción: </strong> {{detalles.7}}</p>
+            {% set id = detalles.dequeue() %}
+            {% set victima = detalles.dequeue() %}
+            {% set numVictimarios = detalles.dequeue() %}
+            {% set lugar = detalles.dequeue() %}
+            {% set tipo = detalles.dequeue() %}
+            {% set frecuencia = detalles.dequeue() %}
+            {% set victimario = detalles.dequeue() %}
+            {% set descripcion = detalles.dequeue() %}
+
+            <p><strong>id: </strong> {{id}}</p>
+            <p><strong>Nombre de la victima: </strong> {{victima}}</p>
+            <p><strong>Número de victimarios: </strong> {{numVictimarios}}</p>
+            <p><strong>Lugar: </strong> {{lugar}}</p>
+            <p><strong>Tipo de acoso: </strong> {{tipo}}</p>
+            <p><strong>Frecuencia: </strong> {{frecuencia}}</p>
+            <p><strong>Victimario: </strong> {{victimario}}</p>
+            <p><strong>Descripción: </strong> {{descripcion}}</p>
         </div>
         
       </div>

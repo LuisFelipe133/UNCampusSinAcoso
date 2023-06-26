@@ -87,7 +87,7 @@ def deleteDenPsi():
         id_den = request.form["id_denuncia_del"]
         ModelUser.delete_denuncia(db,id_den)
         user_id = session['user_id']
-        results=ModelUser.get_all_denuncias(db)
+        results:Queue=ModelUser.get_all_denuncias(db)
         return render_template('auth/denunciasDoc.html',denuncias=results)
         
 
@@ -97,7 +97,7 @@ def verInfo_denuncias():
     if request.method=="POST":
         den_id = request.form["id_denuncia"]
         denuncia_id=den_id
-        results2=ModelUser.get_user_id_denuncia(db,den_id)
+        results2:Queue=ModelUser.get_user_id_denuncia(db,den_id)
         return render_template('auth/denWin.html',detalles=results2)
     
 
