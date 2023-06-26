@@ -27,21 +27,25 @@
           </tr>
         </thead>
         <tbody>
-          {% for denuncia in denuncias %}
+          {% for i in range(denuncias.len()//4) %}
+          {% set id = denuncias.dequeue() %}
+          {% set victima = denuncias.dequeue() %}
+          {% set lugar = denuncias.dequeue() %}
+          {% set victimario = denuncias.dequeue() %}
           <tr>
-              <td>{{denuncia.0}}</td>
-              <td>{{denuncia.1}}</td>
-              <td>{{denuncia.2}}</td>
-              <td>{{denuncia.3}}</td>
+              <td>{{id}}</td>
+              <td>{{victima}}</td>
+              <td>{{lugar}}</td>
+              <td>{{victimario}}</td>
               <td>
               <form action="/verDen" method="POST">
-                <input type="hidden" name="id_denuncia" value="{{denuncia.0}}">
+                <input type="hidden" name="id_denuncia" value="{{id}}">
               <button id="btn-abrir-denuncia">Ver detalles</button>
             </form>
 
             <td>
               <form action="/deletePsi" method="POST">
-                <input type="hidden" name="id_denuncia_del" value="{{denuncia.0}}">
+                <input type="hidden" name="id_denuncia_del" value="{{id}}">
               <button id="btn-abrir-denuncia">Denuncia atendida</button>
             </form>
             </td>

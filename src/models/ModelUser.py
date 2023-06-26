@@ -111,28 +111,35 @@ class ModelUser():
             print('Error : ' + e)
     
     @classmethod
-    def get_rol_usuario(self,db:MySQL,id):
+    def get_rol_usuario(self,db:MySQL,id)->HashTable:
         try:
             cursor = db.connection.cursor()
             sql= """ SELECT usu_rol FROM usuario 
             WHERE usu_id = '{}' """.format(id)
             cursor.execute(sql)
             row=cursor.fetchone()
-            return row
+            rol = HashTable()
+            rol.insert("rol",row[0])
+            print(rol.get("rol"))
+            return rol
         except Exception as ex:
             print("EXCEPTION: ",ex.with_traceback)
     
     @classmethod
-    def get_all_denuncias(self,db:MySQL):
+    def get_all_denuncias(self,db:MySQL)->Queue:
         try:
             cursor = db.connection.cursor()
             cursor.callproc('get_all_denuncias')
             results = cursor.fetchall()
             cursor.close()
             db.connection.commit()
-            return results
+            denuncias = Queue()
+            for j in range(len(results)):
+                for i in results[j]:
+                    denuncias.enqueue(i)
+            return denuncias
         except Exception as e:
-            print('Error : ' + e)
+            print('Error : ',e)
 
     @classmethod 
     def get_user_id_denuncia(self,db:MySQL,id):
@@ -154,4 +161,4 @@ class ModelUser():
             WHERE den_id = '{}' """.format(id)
             cursor.execute(sql)
         except Exception as e:
-            print('Error : ' + str(e))
+            print('Error : ',str(e))
