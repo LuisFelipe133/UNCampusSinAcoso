@@ -1,5 +1,6 @@
 from.entities.User import User
 from flask_mysqldb import MySQL
+from data.structures.HashTable import HashTable
 
 class ModelUser():
     @classmethod
@@ -10,8 +11,12 @@ class ModelUser():
             WHERE usu_correo LIKE '{}' """.format(user.correo)
             cursor.execute(sql)
             row=cursor.fetchone()
+            user_atributes = HashTable()
+            user_atributes.insert("id",row[0])
+            user_atributes.insert("correo",row[1],)
+            user_atributes.insert("password",row[2])
             if row != None:
-                user=User(row[0],row[1],User.check_password(row[2],user.password))
+                user=User(user_atributes.get("id"),user_atributes.get("correo"),User.check_password(user_atributes.get("password"),user.password))
                 return user
             else:
                 return None
@@ -24,8 +29,11 @@ class ModelUser():
             sql = "SELECT usu_id, usu_correo FROM usuario WHERE usu_id = {}".format(id)
             cursor.execute(sql)
             row = cursor.fetchone()
+            key_atributes = HashTable()
+            key_atributes.insert("usr_id",row[0])
+            key_atributes.insert("usr_correo",row[1])
             if row != None:
-                return User(row[0], row[1], None)
+                return User(key_atributes.get("usr_id"), key_atributes.get("usr_correo"), None)
             else:
                 return None
         except Exception as ex:
