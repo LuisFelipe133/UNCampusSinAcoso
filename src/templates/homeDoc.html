@@ -3,8 +3,29 @@
 {% block title %}Home{% endblock %}
 
 {% block body %}
+<style>
+  body {
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden; /* Evita que el contenido horizontal desborde la pantalla */
+  }
+  
+  .welcome-header {
+      font-size: 60px;
+      text-align: center;
+      background-color: #465df2;
+      color: #fff;
+      padding: 20px ; /* Espaciado vertical */
+      margin: 0;
+  }
+  .header img {
+        width: 400px; /* Ancho deseado de la imagen */
+        height: 350px; /* Altura automática para mantener la proporción */
+        margin-bottom: 20px; /* Espacio opcional después de la imagen */
+    }
+</style>
+<h1 class="welcome-header">Bienvenid@ Psic. {{current_user.correo}}</h1>
 
-<h1>Bienvenido Doc, {{current_user.correo}}</h1>
 
 
 {% with messages = get_flashed_messages() %}
@@ -169,16 +190,20 @@
 
     <div class="row g-5">
       <div class="col-md-5 col-lg-4 order-md-last">
-        <h4 class="d-flex justify-content-between align-items-center mb-3">
+        <div class="header">
+          <img src="{{ url_for('static', filename='img/sm2.png') }}" alt="" class="logo">
+      </div>
+      <div class="col-md-34"> 
             <form action="/perfil" method="POST">
           <button class="w-100 btn btn-primary btn-lg" >Ver perfil</button>
             </form>
-        </h4>
-        <h4 class="d-flex justify-content-between align-items-center mb-3">
-            <form action="/denuncias" method="POST">
-              <button class="w-100 btn btn-primary btn-lg" >Ver denuncias</button>
-            </form>
-        </h4>
+      </div>
+      <p></p>
+      <div class="col-md-34">
+        <form action="/denuncias" method="POST">
+          <button class="w-100 btn btn-primary btn-lg" >Ver denuncias</button>
+        </form> 
+      </div>
       </div>
     
 
