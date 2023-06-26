@@ -60,7 +60,7 @@ def login():
 def perfil():
     if request.method=='POST':
         user_id = session['user_id']
-        results=ModelUser.get_denuncias_curUser(db,user_id)
+        results:Queue=ModelUser.get_denuncias_curUser(db,user_id)
         nombreCompleto=ModelUser.get_nombreCompleto_curUser(db,user_id)
         info=ModelUser.obtenerInformacionEstudiante(db,user_id)
         return render_template('auth/perfil.html',denuncias=results, nombreCompleto=nombreCompleto,info=info)

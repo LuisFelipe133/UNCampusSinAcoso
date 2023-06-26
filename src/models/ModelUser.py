@@ -1,6 +1,7 @@
 from.entities.User import User
 from flask_mysqldb import MySQL
 from data.structures.HashTable import HashTable
+from data.structures.Queue import Queue
 
 class ModelUser():
     @classmethod
@@ -60,15 +61,21 @@ class ModelUser():
             return 'Conexión exitosa a la base de datos'
         except Exception as e:
             return 'Error al conectar a la base de datos: ' + str(e)
+        
     @classmethod
-    def get_denuncias_curUser(self,db:MySQL,id):
+    def get_denuncias_curUser(self,db:MySQL,id)->Queue:
         try:
             cursor = db.connection.cursor()
             cursor.callproc('get_denuncias_curUser',(id,))
             results = cursor.fetchall()
             cursor.close()
             db.connection.commit()
-            return results
+            user_denuncias = Queue()
+            for j in range(len(results)):
+                for i in results[j]:
+                    user_denuncias.enqueue(i)
+            user_denuncias.printQueue()
+            return user_denuncias
         except Exception as e:
             print('Error : ' + e)
     @classmethod
