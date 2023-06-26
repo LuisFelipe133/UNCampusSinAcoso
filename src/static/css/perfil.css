@@ -1,7 +1,7 @@
 .container {
     
     display: flex;
-    height: 50vh; /* Establece la altura del contenedor para ocupar toda la pantalla */
+    height: 60vh; /* Establece la altura del contenedor para ocupar toda la pantalla */
     /*background-color: #9cf3eff6;*/
   }
 .container2{
@@ -81,6 +81,14 @@ table.center-table {
     border-radius: 10px;
     margin-right: 145px;
     margin-left: 145px;
+}
+.welcome-header {
+  font-size: 60px;
+  text-align: center;
+  background-color: #465df2;
+  color: #fff;
+  padding: 20px;
+  margin: 0;
 }
 
   body{
